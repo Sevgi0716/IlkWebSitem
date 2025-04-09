@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sevgi Tasarım</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Quicksand&display=swap">
+    <style>
+        /* Genel stil ayarları */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Sayfa açıldığında alevli altın kenarlık efekti */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            box-shadow: 0 0 60px gold inset;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 60px gold inset;
+            }
+
+            50% {
+                box-shadow: 0 0 100px 20px red inset;
+            }
+        }
+
+        /* Logo pozisyonlandırma */
+        .logo {
+            border-radius: 50px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: auto;
+            margin-top: -25px;/* Üstten çok az mesafe */
+            margin-left: 20px
+        }
+
+        /* Navigasyon menüsü */
+        nav {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 50px;
+        }
+
+        nav a {
+            color: #ff0000c0;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 20px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            box-shadow: 0px 0px 30px 15px rgb(240, 33, 33);
+            border-radius: 5px;
+            padding: 15px 25px;
+            color: gold;
+            text-shadow:5px 5px gray;
+        }
+
+        /* Slider kutularını tutan container */
+        .sliders {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 90px;
+        
+        }
+
+        /* Ortak slider kutu özellikleri */
+        .box {
+            width: 250px;
+            height: 500px;
+            border: 3px solid rgb(255, 0, 0);
+            background-position: center;
+            background-size: cover;
+            position: relative;
+            transition: all 0.5s ease-in-out;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Hover durumunda efekt ve yazı kutusu görünümü */
+        .box:hover::before {
+            content: "";
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        /* "İzlemek için tıkla" yazısı */
+        .box span {
+            position: absolute;
+            bottom: 50%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: rgb(233, 232, 227);
+            opacity: 0;
+            transition: 0.5s ease;
+            z-index: 2;
+        }
+
+        .box span {
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            color: gold;
+            transition: 0.4s;
+        }
+
+        .box .info {
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            color: rgb(255, 255, 253);
+            transition: 0.4s;
+        }
+
+        .box .info {
+            bottom: 10px;
+            font-size: 14px;
+            font-style: italic;
+            opacity: 0;
+            z-index: 2;
+        }
+
+        .box:hover {
+            width: 300px;
+            border-color: gold;
+            box-shadow: 0 0 30px 15px rgb(240, 33, 33);
+            border-radius: 15px;
+        }
+
+        /* Hoverda yazıyı göster */
+        .box:hover span,
+        .box:hover .info,
+        .box :hover::before {
+            opacity: 1;
+        }
+
+        /* Alt bilgi kutusu (film hakkında ipucu) */
+        .hint {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: white;
+            font-size: 12px;
+            font-style: italic;
+            z-index: 2;
+        }
+
+        /* Slider arka planları */
+        #box1 {
+            background-image: url('Big Hero 6.jpg');
+        }
+
+        #box2 {
+            background-image: url('SNOW WHITE.jpg');
+        }
+
+        #box3 {
+            background-image: url('The Lion King.jpg');
+        }
+
+        #box4 {
+            background-image: url('Wreck it Ralph.jpg');
+        }
+
+        /* Alt açıklama kartları */
+        .film-info-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 160px;
+            flex-wrap: wrap;
+        }
+
+        .film-card {
+            background-color: #111;
+            border: 2px solid gold;
+            padding: 20px;
+            width: 250px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px red;
+            transition: all 0.4s ease;
+        }
+
+        .film-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px gold;
+        }
+
+        .film-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: gold;
+        }
+
+        .film-card p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Alt bilgi kısmı (footer) */
+        footer {
+            margin-top: 60px;
+            background-color: #222;
+            color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            box-shadow: 10px 7px 20px 10px gray;
+        }
+
+        .footer-section {
+            max-width: 300px;
+        }
+
+        .footer-section h4 {
+            color: gold;
+        }
+
+        .footer-section i {
+            color: red;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Logo görseli -->
+    <img src="logo.png" alt="Logo" class="logo">
+
+    <!-- Navigasyon menüsü -->
+    <nav>
+        <a href="#">Ana Sayfa</a>
+        <a href="#">Hizmetler</a>
+        <a href="#">Projeler</a>
+        <a href="#">İletişim</a>
+        <a href="#">Boş Link</a>
+    </nav>
+
+    <!-- Slider kutuları -->
+    <section class="sliders">
+        <div class="box" id="box1" onclick="playVideo('6superhero.mp4')">
+            <span>İzlemek için tıkla</span>
+            <div class="info">Bir robotun kahramanlığa dönüşen hikayesi.</div>
+        </div>
+        <div class="box" id="box2" onclick="playVideo('snowwhite.mp4')">
+            <span>İzlemek için tıkla</span>
+            <div class="info">Kötü kalpli kraliçeye karşı masumiyetin zaferi.</div>
+        </div>
+        <div class="box" id="box3" onclick="playVideo('aslankral.mp4')">
+            <span>İzlemek için tıkla</span>
+            <div class="info">Gurur kayası, bir liderin yükselişi.</div>
+        </div>
+        <div class="box" id="box4" onclick="playVideo('oyunbozanralph.mp4')">
+            <span>İzlemek için tıkla</span>
+            <div class="info">Kötü karakterlikten kahramanlığa!</div>
+        </div>
+    </section>
+
+    <!-- Film açıklama kartları -->
+    <section class="film-info-container">
+        <div class="film-card">
+            <h3>Çizgi Filmler ve Hayal Gücü</h3>
+            <p>Çocukların yaratıcılığını tetikleyen çizgi filmler, özgür düşünceye kapı aralar.</p>
+        </div>
+        <div class="film-card">
+            <h3>Eğitimsel Katkı</h3>
+            <p>Çizgi filmler eğlendirirken aynı zamanda öğretici unsurlar da taşır.</p>
+        </div>
+        <div class="film-card">
+            <h3>Kültürel Bağ</h3>
+            <p>Farklı kültürleri tanıma ve empati kurma becerisini destekler.</p>
+        </div>
+        <div class="film-card">
+            <h3>İlham Verici Kahramanlar</h3>
+            <p>Çocuklara rol model olan kahramanlar, olumlu davranışları teşvik eder.</p>
+        </div>
+    </section>
+
+    <!-- Alt bilgi (footer) -->
+    <footer>
+        <div class="footer-section">
+            <h4>Hakkımızda</h4>
+            <p>Sevgi Tasarım, çizgi film tutkusuyla hazırlanan özel bir projedir.</p>
+        </div>
+        <div class="footer-section">
+            <h4>İletişim</h4>
+            <p><i class="fas fa-envelope"></i> vovonooomar@gmail.com</p>
+            <p><i class="fas fa-phone"></i> +90 555 555 55 55</p>
+        </div>
+        <div class="footer-section">
+            <h4>Konum</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 📍Zuhal, Türkiye <img src="40f73de28768b18d5373617c61553806851f5253.jpeg" alt="" style="width: 60px;height: 50px;"></p>
+        </div>
+    </footer>
+
+    <!-- Video oynatma scripti -->
+    <script>
+        function playVideo(videoSrc) {
+            const video = document.createElement("video");
+            video.src = videoSrc;
+            video.controls = true;
+            video.autoplay = true;
+            video.style.position = "fixed";
+            video.style.top = "50%";
+            video.style.left = "50%";
+            video.style.transform = "translate(-50%, -50%)";
+            video.style.width = "80%";
+            video.style.zIndex = "9999";
+
+            document.body.appendChild(video);
+            video.requestFullscreen();
+
+            video.onclick = function () {
+                video.remove();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            video.onended = function () {
+                video.remove();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+        }
+    </script>
+    <!-- Font Awesome simgeler için -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
